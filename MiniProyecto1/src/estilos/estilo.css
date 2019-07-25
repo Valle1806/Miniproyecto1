@@ -1,0 +1,12 @@
+
+/* Cultura Muisca al descubierto */
+
+.tituloPanel{
+	-fx-font-family: "Rye";
+	-fx-font-size: 48px;
+    -fx-text-fill: #C8B46D;
+    -fx-border-color: #000000;
+    -fx-border-style: solid;
+    -fx-border-width: 3px;
+}
+

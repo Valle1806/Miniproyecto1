@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<Pane fx:id="panelRaiz" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#moverPanel" onMousePressed="#copiarCoordenadas" prefHeight="665.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controles.ControlVPrincipal">
+   <children>
+      <ImageView fitHeight="670.0" fitWidth="1017.0" layoutX="-8.0">
+         <image>
+            <Image url="@../imagenes/fondo.jpg" />
+         </image>
+      </ImageView>
+      <JFXButton id="botonCerrar" fx:id="botonCerrar" layoutX="969.0" layoutY="3.0" onAction="#cerrar" prefHeight="25.0" prefWidth="25.0" ripplerFill="WHITE" style="-fx-graphic: url('/imagenes/close.png');" text=" " />
+      <JFXButton id="botonMinimizar" fx:id="botonMinimizar" layoutX="935.0" layoutY="4.0" onAction="#minimizar" prefHeight="25.0" prefWidth="25.0" ripplerFill="WHITE" style="-fx-graphic: url('/imagenes/minimize.png');" text=" " />
+      <ImageView fitHeight="270.0" fitWidth="263.0" layoutX="383.0" layoutY="381.0">
+         <image>
+            <Image url="@../imagenes/niño%20explorador.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="221.0" layoutY="53.0" prefHeight="25.0" prefWidth="622.0" stylesheets="@../estilos/estilo.css" text="Cultura Muisca" textFill="#c8b46d">
+         <font>
+            <Font name="Ravie" size="48.0" />
+         </font>
+      </Label>
+      <Label layoutX="247.0" layoutY="114.0" prefHeight="25.0" prefWidth="622.0" text="al descubierto" textFill="#c8b46d">
+         <font>
+            <Font name="Ravie" size="48.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="botonA" layoutX="347.0" layoutY="237.0" onAction="#mostrarEsperarCarta" prefHeight="72.0" prefWidth="153.0" ripplerFill="#e3222202" text="Opcion A" />
+      <JFXButton layoutX="515.0" layoutY="237.0" prefHeight="72.0" prefWidth="153.0" text="Opcion B" />
+   </children>
+</Pane>

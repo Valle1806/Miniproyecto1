@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.media.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
@@ -28,7 +29,7 @@
             <Font name="Ravie" size="48.0" />
          </font>
       </Label>
-      <Label fx:id="mensajeUbicaCarta" layoutX="136.0" layoutY="352.0" text="Ubica la carta deseada sobre el sensor...">
+      <Label fx:id="mensajeUbicaCarta" layoutX="136.0" layoutY="168.0" text="Ubica la carta deseada sobre el sensor...">
          <font>
             <Font name="Ravie" size="24.0" />
          </font>
@@ -45,6 +46,9 @@
       </Label>
       <JFXButton fx:id="botonInicio" layoutX="44.0" layoutY="27.0" onAction="#regresarInicio" prefHeight="61.0" prefWidth="70.0" style="-fx-graphic: url('/imagenes/inicio.png');" text="  " />
       <JFXButton fx:id="botonIPregunta" layoutX="634.0" layoutY="590.0" onAction="#cambiarAIPregunta" prefHeight="53.0" prefWidth="158.0" style="-fx-background-color: #E4E70E;" />
-      <MediaView fx:id="video" fitHeight="370.0" fitWidth="600.0" layoutX="311.0" layoutY="213.0" />
+      <MediaView fx:id="video" fitHeight="370.0" fitWidth="600.0" layoutX="311.0" layoutY="213.0">
+         <viewport>
+            <Rectangle2D height="370.0" minX="600.0" minY="370.0" width="600.0" />
+         </viewport></MediaView>
    </children>
 </Pane>

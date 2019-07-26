@@ -3,10 +3,13 @@ package controles;
 import java.util.Optional;
 
 import com.jfoenix.controls.JFXButton;
+import com.panamahitek.ArduinoException;
+import com.panamahitek.PanamaHitek_Arduino;
 
 import clases.Pregunta;
 import clases.Principal;
 import clases.Respuesta;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +22,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import jssc.SerialPortEvent;
+import jssc.SerialPortEventListener;
+import jssc.SerialPortException;
 
 public class ControlPregunta {
 
@@ -44,10 +50,11 @@ public class ControlPregunta {
     private JFXButton respuestaB;
     @FXML
     private JFXButton respuestaD;
+    private PanamaHitek_Arduino arduino = new PanamaHitek_Arduino();
     
     
-    
-    public void initialize(Pregunta preguntas) {  
+    public void inicio(Pregunta preguntas) {
+    	
     	pregunta.setText(preguntas.getPregunta());
     	Respuesta respuestas[]=preguntas.getRespuestas();
     	for(int i=0; i<respuestas.length; i++) {
@@ -59,6 +66,16 @@ public class ControlPregunta {
     	respuestaB.setText(respuestas[1].getRespuesta());
     	respuestaC.setText(respuestas[2].getRespuesta());
     	respuestaD.setText(respuestas[3].getRespuesta());
+    	
+    	try {
+			arduino.arduinoRX("COM12", 9600, comListener);
+		} catch (ArduinoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SerialPortException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     @FXML
     void verificarRespuestaA(ActionEvent event) {
@@ -72,9 +89,94 @@ public class ControlPregunta {
     		respuesta= "Respuesta Incorrecta";
     		colorFondo="#E72323";
     	}
-    	cargarInterfazRespuesta(event);
+    	cargarInterfazRespuesta();
     }
 
+   
+    private SerialPortEventListener comListener = new SerialPortEventListener() {
+		@Override
+		public void serialEvent(SerialPortEvent arg0) {
+			// TODO Auto-generated method stub
+			
+			try {
+				if(arduino.isMessageAvailable()) {
+					String opcion = arduino.printMessage();
+					int op = Integer.parseInt(opcion);
+					//fondo.setText(opcion);
+					switch(op) {
+					  case 1: if(respuestaA.getText().equals(correcta)) {
+						  		puntos= "10pts";
+						  		respuesta= "Respuesta Correcta"; 
+						  		colorFondo="#3FF500";
+					  			}else {
+					  	    		puntos= "0pts";
+					  	    		respuesta= "Respuesta Incorrecta";
+					  	    		colorFondo="#E72323";
+					  	    	}
+					  			Platform.runLater(new Runnable() {
+					  				@Override public void run() {
+					  					cargarInterfazRespuesta();						  				}
+					  			});
+					  		  
+					  			
+					          break;
+					  case 2: if(respuestaB.getText().equals(correcta)) {
+					  			puntos= "10pts";
+					  			respuesta= "Respuesta Correcta"; 
+					  			colorFondo="#3FF500";
+				  			   }else {
+				  	    		puntos= "0pts";
+				  	    		respuesta= "Respuesta Incorrecta";
+				  	    		colorFondo="#E72323";
+				  			   }
+					  			Platform.runLater(new Runnable() {
+					  				@Override public void run() {
+					  					cargarInterfazRespuesta();						  				}
+					  			});
+						      break;
+					  case 3: if(respuestaC.getText().equals(correcta)) {
+					  			puntos= "10pts";
+					  			respuesta= "Respuesta Correcta"; 
+					  			colorFondo="#3FF500";
+				  			   }else {
+				  	    		puntos= "0pts";
+				  	    		respuesta= "Respuesta Incorrecta";
+				  	    		colorFondo="#E72323";
+				  	    	   }
+							  	Platform.runLater(new Runnable() {
+					  				@Override public void run() {
+					  					cargarInterfazRespuesta();						  				}
+					  			});
+				  			
+						      break;
+					  case 4: if(respuestaD.getText().equals(correcta)) {
+					  			puntos= "10pts";
+					  			respuesta= "Respuesta Correcta"; 
+					  			colorFondo="#3FF500";
+				  			  }else {
+				  	    		puntos= "0pts";
+				  	    		respuesta= "Respuesta Incorrecta";
+				  	    		colorFondo="#E72323";
+				  			  }
+							  Platform.runLater(new Runnable() {
+					  				@Override public void run() {
+					  					cargarInterfazRespuesta();						  				}
+					  			});
+				  			
+					          break;
+					  default:
+						  break;
+					 
+					}//
+					
+				}
+			} catch (SerialPortException | ArduinoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	};
     @FXML
     void verificarRespuestaB(ActionEvent event) {
     	if(respuestaB.getText().equals(correcta)) {
@@ -87,7 +189,7 @@ public class ControlPregunta {
     		respuesta= "Respuesta Incorrecta";
     		colorFondo="#E72323";
     	}
-    	cargarInterfazRespuesta(event);
+    	cargarInterfazRespuesta();
     }
 
     @FXML
@@ -103,7 +205,7 @@ public class ControlPregunta {
     		respuesta= "Respuesta Incorrecta";
     		colorFondo="#E72323";
     	}
-    	cargarInterfazRespuesta(event);
+    	cargarInterfazRespuesta();
     }
 
     @FXML
@@ -119,20 +221,20 @@ public class ControlPregunta {
     		respuesta= "Respuesta Incorrecta";
     		colorFondo="#E72323";
     	}
-    	cargarInterfazRespuesta(event);
+    	cargarInterfazRespuesta();
     }
     @FXML
-    public void cargarInterfazRespuesta(ActionEvent event) {
+    public void cargarInterfazRespuesta() {
     	try {
+    		arduino.killArduinoConnection();
 			FXMLLoader cargador = new FXMLLoader();
 			cargador.setLocation(Principal.class.getResource("/vistas/respuesta.fxml"));
 			Parent raiz = (Parent)cargador.load();
 			ControlRespuesta control= cargador.getController();
 			control.setStage(escenarioPrincipal);
 			control.cargar(puntos, respuesta, colorFondo);
-			Pane panelCentral = (Pane)((Button)event.getSource()).getParent();
-			panelCentral.getChildren().clear();
-			panelCentral.getChildren().add(raiz);
+			panelRaiz.getChildren().clear();
+			panelRaiz.getChildren().add(raiz);
 			//EFECTO
 			/*Scene escenario = raiz.getScene();
 			raiz.translateXProperty().set(escenario.getWidth());

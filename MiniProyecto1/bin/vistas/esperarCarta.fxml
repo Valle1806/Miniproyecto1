@@ -12,7 +12,7 @@
 
 <Pane fx:id="panelRaiz" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#moverPanel" onMousePressed="#copiarCoordenadas" prefHeight="665.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controles.ControlEsperaCarta">
    <children>
-      <ImageView fitHeight="665.0" fitWidth="1010.0" layoutX="-2.0" opacity="0.29">
+      <ImageView fitHeight="665.0" fitWidth="1006.0" layoutX="-2.0" opacity="0.29">
          <image>
             <Image url="@../imagenes/fondo.jpg" />
          </image>
@@ -34,11 +34,6 @@
       <ImageView fitHeight="128.0" fitWidth="509.0" layoutX="246.0" layoutY="29.0">
          <image>
             <Image url="@../../bin/imagenes/titulo.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="28.0" fitWidth="560.0" layoutX="206.0" layoutY="181.0">
-         <image>
-            <Image url="@../../bin/imagenes/ubicaCarta.png" />
          </image>
       </ImageView>
    </children>

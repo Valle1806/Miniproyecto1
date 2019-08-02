@@ -64,7 +64,7 @@ public class ControlEsperaCarta {
     
     public void initialize() {  
     	video.setVisible(true);
-       	final File f = new File("src/imagenes/Saguamanchica(1).mp4");
+       	final File f = new File("src/videos/Saguamanchica.mp4");
 		mediaPlayer = new MediaPlayer(new Media(f.toURI().toString()));
         video.setMediaPlayer(mediaPlayer); 
         mediaPlayer.play();

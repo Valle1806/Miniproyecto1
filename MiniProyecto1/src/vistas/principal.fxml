@@ -24,7 +24,7 @@
       </ImageView>
       <JFXButton fx:id="botonA" layoutX="347.0" layoutY="237.0" onAction="#mostrarEsperarCarta" prefHeight="72.0" prefWidth="153.0" ripplerFill="#e3222202" style="-fx-graphic: url('/imagenes/opcionA.png');" text="Opcion A" />
       <JFXButton layoutX="515.0" layoutY="237.0" prefHeight="72.0" prefWidth="153.0" style="-fx-graphic: url('/imagenes/opcionB.png');" text="Opcion B" />
-      <ImageView fitHeight="167.0" fitWidth="559.0" layoutX="216.0" layoutY="37.0">
+      <ImageView fitHeight="158.0" fitWidth="529.0" layoutX="249.0" layoutY="65.0">
          <image>
             <Image url="@../imagenes/titulo.png" />
          </image>

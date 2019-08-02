@@ -48,7 +48,7 @@ public class ControlEsperaCarta {
     @FXML
     private JFXButton botonInicio;
     @FXML
-    private Label mensajeUbicaCarta;
+    private  ImageView mensajeUbicaCarta;
     @FXML
     private Label nombreCarta;
    
@@ -62,18 +62,11 @@ public class ControlEsperaCarta {
     
     private MediaPlayer mediaPlayer;
     
+    private boolean reproducion_video=false;
+    
     public void initialize() {  
     	video.setVisible(true);
-       	final File f = new File("src/videos/Saguamanchica.mp4");
-		mediaPlayer = new MediaPlayer(new Media(f.toURI().toString()));
-        video.setMediaPlayer(mediaPlayer); 
-        mediaPlayer.play();
-        mediaPlayer.setOnEndOfMedia(new Runnable() {
-            @Override
-            public void run() {
-            	cambiarAIPregunta(1);
-            }
-        });
+       	
 
         try {
 			arduino.arduinoRX("COM12", 9600, comListener);
@@ -84,6 +77,22 @@ public class ControlEsperaCarta {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    }
+    
+    void mostrarVideo(String nombre_video) {
+    	
+    	reproducion_video=true;
+    	final File f = new File("src/videos/"+ nombre_video+ ".mp4");
+		mediaPlayer = new MediaPlayer(new Media(f.toURI().toString()));
+        video.setMediaPlayer(mediaPlayer); 
+        mediaPlayer.play();
+   
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+            	cambiarAIPregunta(0);
+            }
+        });
     }
     
     
@@ -100,36 +109,50 @@ public class ControlEsperaCarta {
 					
 					switch(op) {
 					  case 1: imagenCarta.setVisible(true);
+					  			mostrarVideo("ayuda");
 					  		  mensajeUbicaCarta.setVisible(false);
+					  		arduino.killArduinoConnection();
 					  		  System.out.println("1");
 					  		  
 					          break;
 					  case 2: imagenCarta.setVisible(true);
+					  			mostrarVideo("ayuda");
 					  		  mensajeUbicaCarta.setVisible(false);
+					  		arduino.killArduinoConnection();
 					  		  System.out.println("2");
 						      break;
 					  case 3: imagenCarta.setVisible(true);
+					  			mostrarVideo("ayuda");
 			  		          mensajeUbicaCarta.setVisible(false);
+			  		        arduino.killArduinoConnection();
 			  		        System.out.println("3");
 						      break;
 					  case 4: imagenCarta.setVisible(true);
+					  			mostrarVideo("ayuda");
 					  		  mensajeUbicaCarta.setVisible(false);
+					  		arduino.killArduinoConnection();
 					  		System.out.println("4");
 					          break;
 					  case 5: imagenCarta.setVisible(true);
+					  			mostrarVideo("ayuda");
 					  		  mensajeUbicaCarta.setVisible(false);
+					  		arduino.killArduinoConnection();
 					  		System.out.println("5");
 					  		  break;
 					  case 6: imagenCarta.setVisible(true);
+					  			mostrarVideo("ayuda");
 					  		  mensajeUbicaCarta.setVisible(false);
+					  		arduino.killArduinoConnection();
 					  		System.out.println("6");
 			  		  		  break;
 					  case 7: imagenCarta.setVisible(true);
 			  		  		  mensajeUbicaCarta.setVisible(false);
+			  		  		arduino.killArduinoConnection();
 			  		  		System.out.println("7");
 						  	  break;
 					  case 8: imagenCarta.setVisible(true);
 			  		  		  mensajeUbicaCarta.setVisible(false);
+			  		  		arduino.killArduinoConnection();
 			  		  		  break;
 					}//
 					
@@ -142,14 +165,12 @@ public class ControlEsperaCarta {
 		}
 	};
 	
-	
-    
-    	
-    
     @FXML
     void regresarInicio(ActionEvent event) {
     	try {
-    		mediaPlayer.stop();
+	    	if(reproducion_video) {
+	    		mediaPlayer.stop();
+	    	}
 			FXMLLoader cargador = new FXMLLoader();
 			cargador.setLocation(Principal.class.getResource("/vistas/principal.fxml"));
 			Parent raiz = (Parent)cargador.load();
@@ -173,7 +194,6 @@ public class ControlEsperaCarta {
 			cargador.setLocation(Principal.class.getResource("/vistas/pregunta.fxml"));
 			Parent raiz = (Parent)cargador.load();
 			ControlPregunta control =cargador.getController();
-			//arduino.killArduinoConnection();
 			control.inicio(tipo_carta,1);
 			Scene escenario = new Scene(raiz); 
 			escenarioPrincipal.setScene(escenario);

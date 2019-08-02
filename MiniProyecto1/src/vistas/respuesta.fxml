@@ -17,16 +17,6 @@
       </ImageView>
       <JFXButton id="botonCerrar" fx:id="botonCerrar" layoutX="969.0" layoutY="2.0" onAction="#cerrar" prefHeight="25.0" prefWidth="25.0" style="-fx-graphic: url('/imagenes/close.png');" text=" " />
       <JFXButton id="botonMinimizar" fx:id="botonMinimizar" layoutX="935.0" layoutY="3.0" onAction="#minimizar" prefHeight="25.0" prefWidth="25.0" ripplerFill="WHITE" style="-fx-graphic: url('/imagenes/minimize.png');" text=" " />
-      <Label layoutX="221.0" layoutY="53.0" prefHeight="25.0" prefWidth="622.0" stylesheets="@../estilos/estilo.css" text="Cultura Muisca" textFill="#c8b46d">
-         <font>
-            <Font name="Ravie" size="48.0" />
-         </font>
-      </Label>
-      <Label layoutX="247.0" layoutY="114.0" prefHeight="25.0" prefWidth="622.0" text="al descubierto" textFill="#c8b46d">
-         <font>
-            <Font name="Ravie" size="48.0" />
-         </font>
-      </Label>
       <Label fx:id="respuesta" layoutX="340.0" layoutY="285.0" prefHeight="30.0" prefWidth="372.0" text="Respuesta C/I">
          <font>
             <Font name="Ravie" size="24.0" />
@@ -39,5 +29,10 @@
          </font>
       </Label>
       <ImageView fx:id="imagenRespuesta" fitHeight="198.0" fitWidth="268.0" layoutX="340.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="168.0" fitWidth="529.0" layoutX="249.0" layoutY="63.0">
+         <image>
+            <Image url="@../imagenes/titulo.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

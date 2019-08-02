@@ -25,6 +25,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import jssc.SerialPortEvent;
 import jssc.SerialPortEventListener;
@@ -69,17 +71,35 @@ public class ControlPregunta {
     	iniciarPreguntas();
     	contadorAux=contador;
     	this.tipo_carta=tipo_carta;
-    	pregunta.setText(preguntas[0].getPregunta());
-    	Respuesta respuestas[]=preguntas[0].getRespuestas();
+    	
+    	pregunta.setText(preguntas[tipo_carta].getPregunta());
+    	Respuesta respuestas[]=preguntas[tipo_carta].getRespuestas();
     	for(int i=0; i<respuestas.length; i++) {
     		if(respuestas[i].getCorrecto()) {
     			correcta=respuestas[i].getRespuesta();
     		}
     	}
+    	respuestaA.setWrapText(true);
     	respuestaA.setText(respuestas[0].getRespuesta());
+    	respuestaA.setTextFill(Color.WHITE);
+    	respuestaA.setFont(new Font("Cambria", 18));
+    	
+    	respuestaB.setWrapText(true);
     	respuestaB.setText(respuestas[1].getRespuesta());
+    	respuestaB.setFont(new Font("Cambria", 18));
+    	respuestaB.setTextFill(Color.WHITE);
+    	
+
+    	respuestaC.setWrapText(true);
     	respuestaC.setText(respuestas[2].getRespuesta());
+    	respuestaC.setFont(new Font("Cambria", 18));
+    	respuestaC.setTextFill(Color.WHITE);
+    	
+
+    	respuestaD.setWrapText(true);
     	respuestaD.setText(respuestas[3].getRespuesta());
+    	respuestaD.setFont(new Font("Cambria", 18));
+    	respuestaD.setTextFill(Color.WHITE);
     	
     	try {
 			arduino.arduinoRX("COM12", 9600, comListener);
@@ -93,11 +113,29 @@ public class ControlPregunta {
     }
     
     void iniciarPreguntas() {
-    	preguntas[0]= new Pregunta("¿Qué era Saguamanchica?", new Respuesta[] {
-    			new Respuesta("un Dios", false),
-    			new Respuesta("un Zaque", true),
-    			new Respuesta("un Zipa", false),
-    			new Respuesta("un Cacique", false)
+    	preguntas[0]= new Pregunta("¿De qué piedra preciosa proviene Goranchancha?", new Respuesta[] {
+    			new Respuesta("Zafiro", false),
+    			new Respuesta("Rubi", false),
+    			new Respuesta("Esmeralda", true),
+    			new Respuesta("Diamante", false)
+    	});
+    	preguntas[1]= new Pregunta("¿Por qué destronaron a Goranchancha?", new Respuesta[] {
+    			new Respuesta("fue acusado de ser el culpable de traer la hambruna y la sequía al valle", false),
+    			new Respuesta("Porque era un mal gobernante", true),
+    			new Respuesta("Porque los hijos de los dioses no pueden gobernar", true),
+    			new Respuesta("Porque el pueblo se reveló ante él", false)
+    	});
+    	preguntas[2]= new Pregunta("¿En qué lugar nació Bachué?", new Respuesta[] {
+    			new Respuesta("Laguna de Iguaque",true),
+    			new Respuesta("Laguna de Guatavita", false),
+    			new Respuesta("Lago de la tota", false),
+    			new Respuesta("Laguna de Tibatiquica", false)
+    	});
+    	preguntas[2]= new Pregunta("¿Quién es Bachué?", new Respuesta[] {
+    			new Respuesta("La diosa de la luna", false),
+    			new Respuesta("La diosa del trigo", false),
+    			new Respuesta("La madre del pueblo Muisca", true),
+    			new Respuesta("Una cacique", false)
     	});
     }
     @FXML
@@ -248,7 +286,7 @@ public class ControlPregunta {
     @FXML
     public void cargarInterfazRespuesta() {
     	try {
-    		//arduino.killArduinoConnection();
+    		arduino.killArduinoConnection();
 			FXMLLoader cargador = new FXMLLoader();
 			cargador.setLocation(Principal.class.getResource("/vistas/respuesta.fxml"));
 			Parent raiz = (Parent)cargador.load();
@@ -265,7 +303,7 @@ public class ControlPregunta {
     @FXML
     void regresarInicio(ActionEvent event) {
     	try {
-    		//arduino.killArduinoConnection();
+    		arduino.killArduinoConnection();
 			FXMLLoader cargador = new FXMLLoader();
 			cargador.setLocation(Principal.class.getResource("/vistas/principal.fxml"));
 			Parent raiz = (Parent)cargador.load();

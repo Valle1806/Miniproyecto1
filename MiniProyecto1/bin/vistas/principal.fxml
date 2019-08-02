@@ -10,7 +10,7 @@
 
 <Pane fx:id="panelRaiz" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#moverPanel" onMousePressed="#copiarCoordenadas" prefHeight="665.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controles.ControlVPrincipal">
    <children>
-      <ImageView fitHeight="670.0" fitWidth="1017.0" layoutX="-8.0">
+      <ImageView fitHeight="670.0" fitWidth="1017.0" layoutX="-8.0" layoutY="-2.0" opacity="0.71">
          <image>
             <Image url="@../imagenes/fondo.jpg" />
          </image>
@@ -22,8 +22,11 @@
             <Image url="@../imagenes/niño%20explorador.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="botonA" layoutX="347.0" layoutY="237.0" onAction="#mostrarEsperarCarta" prefHeight="72.0" prefWidth="153.0" ripplerFill="#e3222202" style="-fx-graphic: url('/imagenes/opcionA.png');" text="Opcion A" />
-      <JFXButton layoutX="515.0" layoutY="237.0" prefHeight="72.0" prefWidth="153.0" style="-fx-graphic: url('/imagenes/opcionB.png');" text="Opcion B" />
+      <JFXButton fx:id="botonA" layoutX="347.0" layoutY="237.0" onAction="#mostrarEsperarCarta" prefHeight="72.0" prefWidth="153.0" ripplerFill="#e3222202" style="-fx-graphic: url('/imagenes/opcionA.png');" text="Button">
+         <effect>
+            <Reflection />
+         </effect></JFXButton>
+      <JFXButton layoutX="515.0" layoutY="237.0" prefHeight="72.0" prefWidth="153.0" style="-fx-graphic: url('/imagenes/opcionB.png');" />
       <ImageView fitHeight="158.0" fitWidth="529.0" layoutX="249.0" layoutY="65.0">
          <image>
             <Image url="@../imagenes/titulo.png" />

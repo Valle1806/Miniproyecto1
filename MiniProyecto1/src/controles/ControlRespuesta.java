@@ -49,6 +49,7 @@ public class ControlRespuesta {
     @FXML
     private Label puntos;
     private int contador;
+    private int tipo_carta;
 
     public void cargar(String puntoss,String respuestaa,String fondo,int contadorr,int tipo_carta) {
     	String estilo = "-fx-background-color:"+ fondo+";";
@@ -56,6 +57,9 @@ public class ControlRespuesta {
     	puntos.setText(puntoss);
     	respuesta.setText(respuestaa);
     	this.contador= contadorr;
+    	this.tipo_carta= tipo_carta;
+    	this.tipo_carta++;
+    	
     	if(contador>=3) {
     		PauseTransition delay = new PauseTransition(Duration.seconds(5));
     		delay.setOnFinished( event -> mostrarEsperarCarta() );
@@ -64,7 +68,7 @@ public class ControlRespuesta {
     	}else {
     		contador++;
     		PauseTransition delay = new PauseTransition(Duration.seconds(5));
-    		delay.setOnFinished( event -> cambiarAIPregunta(tipo_carta,contador));
+    		delay.setOnFinished( event -> cambiarAIPregunta(this.tipo_carta,contador));
     		delay.play();
     		
     	}

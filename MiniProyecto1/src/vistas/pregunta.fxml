@@ -18,25 +18,40 @@
       </ImageView>
       <JFXButton id="botonCerrar" fx:id="botonCerrar" layoutX="969.0" layoutY="2.0" onAction="#cerrar" prefHeight="25.0" prefWidth="25.0" style="-fx-graphic: url('/imagenes/close.png');" text=" " />
       <JFXButton id="botonMinimizar" fx:id="botonMinimizar" layoutX="935.0" layoutY="3.0" onAction="#minimizar" prefHeight="25.0" prefWidth="25.0" ripplerFill="WHITE" style="-fx-graphic: url('/imagenes/minimize.png');" text=" " />
-      <Label layoutX="221.0" layoutY="53.0" prefHeight="25.0" prefWidth="622.0" stylesheets="@../estilos/estilo.css" text="Cultura Muisca" textFill="#c8b46d">
-         <font>
-            <Font name="Ravie" size="48.0" />
-         </font>
-      </Label>
-      <Label layoutX="247.0" layoutY="114.0" prefHeight="25.0" prefWidth="622.0" text="al descubierto" textFill="#c8b46d">
-         <font>
-            <Font name="Ravie" size="48.0" />
-         </font>
-      </Label>
-      <Label fx:id="pregunta" layoutX="349.0" layoutY="288.0" text="&lt;pregunta&gt;">
+      <Label fx:id="pregunta" layoutX="162.0" layoutY="261.0" text="&lt;pregunta&gt;">
          <font>
             <Font name="Ravie" size="24.0" />
          </font>
       </Label>
       <JFXButton fx:id="botonInicio" layoutX="44.0" layoutY="27.0" onAction="#regresarInicio" prefHeight="61.0" prefWidth="70.0" style="-fx-graphic: url('/imagenes/inicio.png');" text="  " />
-      <JFXButton fx:id="respuestaA" layoutX="179.0" layoutY="406.0" onAction="#verificarRespuestaA" prefHeight="75.0" prefWidth="254.0" style="-fx-background-color: #F32127;" text="A" />
-      <JFXButton fx:id="respuestaB" layoutX="538.0" layoutY="406.0" onAction="#verificarRespuestaB" prefHeight="75.0" prefWidth="254.0" style="-fx-background-color: #21BAF3;" text="B" />
-      <JFXButton fx:id="respuestaC" layoutX="179.0" layoutY="525.0" onAction="#verificarRespuestaC" prefHeight="75.0" prefWidth="254.0" style="-fx-background-color: #85DD6D;" text="C" />
-      <JFXButton fx:id="respuestaD" layoutX="532.0" layoutY="525.0" onAction="#verificarRespuestaD" prefHeight="75.0" prefWidth="254.0" style="-fx-background-color: #E4E70E;" text="D" />
+      <ImageView fitHeight="168.0" fitWidth="529.0" layoutX="249.0" layoutY="58.0">
+         <image>
+            <Image url="@../imagenes/titulo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="152.0" fitWidth="369.0" layoutX="86.0" layoutY="354.0">
+         <image>
+            <Image url="@../imagenes/A.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="respuestaA" layoutX="143.0" layoutY="379.0" onAction="#verificarRespuestaA" prefHeight="100.0" prefWidth="315.0" text=" " />
+      <ImageView fitHeight="152.0" fitWidth="369.0" layoutX="521.0" layoutY="354.0">
+         <image>
+            <Image url="@../imagenes/B.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="respuestaB" layoutX="580.0" layoutY="377.0" onAction="#verificarRespuestaB" prefHeight="100.0" prefWidth="315.0" text=" " />
+      <ImageView fitHeight="152.0" fitWidth="369.0" layoutX="85.0" layoutY="491.0">
+         <image>
+            <Image url="@../imagenes/C.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="respuestaC" layoutX="142.0" layoutY="517.0" onAction="#verificarRespuestaC" prefHeight="100.0" prefWidth="315.0" text=" " />
+      <ImageView fitHeight="152.0" fitWidth="369.0" layoutX="521.0" layoutY="491.0">
+         <image>
+            <Image url="@../imagenes/D.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="respuestaD" layoutX="578.0" layoutY="517.0" onAction="#verificarRespuestaD" prefHeight="100.0" prefWidth="315.0" text=" " />
    </children>
 </Pane>

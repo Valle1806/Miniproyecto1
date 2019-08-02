@@ -1,5 +1,6 @@
 package controles;
 
+import java.io.File;
 import java.util.Optional;
 
 import com.jfoenix.controls.JFXButton;
@@ -21,6 +22,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import jssc.SerialPortEvent;
 import jssc.SerialPortEventListener;
@@ -50,13 +54,23 @@ public class ControlPregunta {
     private JFXButton respuestaB;
     @FXML
     private JFXButton respuestaD;
+    
+    private int contadorAux;
+
+
     private PanamaHitek_Arduino arduino = new PanamaHitek_Arduino();
     
+    private Pregunta[] preguntas= new Pregunta[18];
     
-    public void inicio(Pregunta preguntas) {
-    	
-    	pregunta.setText(preguntas.getPregunta());
-    	Respuesta respuestas[]=preguntas.getRespuestas();
+    private int tipo_carta;
+    
+    
+    public void inicio(int tipo_carta, int contador) {
+    	iniciarPreguntas();
+    	contadorAux=contador;
+    	this.tipo_carta=tipo_carta;
+    	pregunta.setText(preguntas[0].getPregunta());
+    	Respuesta respuestas[]=preguntas[0].getRespuestas();
     	for(int i=0; i<respuestas.length; i++) {
     		if(respuestas[i].getCorrecto()) {
     			correcta=respuestas[i].getRespuesta();
@@ -76,6 +90,15 @@ public class ControlPregunta {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    }
+    
+    void iniciarPreguntas() {
+    	preguntas[0]= new Pregunta("¿Qué era Saguamanchica?", new Respuesta[] {
+    			new Respuesta("un Dios", false),
+    			new Respuesta("un Zaque", true),
+    			new Respuesta("un Zipa", false),
+    			new Respuesta("un Cacique", false)
+    	});
     }
     @FXML
     void verificarRespuestaA(ActionEvent event) {
@@ -102,7 +125,6 @@ public class ControlPregunta {
 				if(arduino.isMessageAvailable()) {
 					String opcion = arduino.printMessage();
 					int op = Integer.parseInt(opcion);
-					//fondo.setText(opcion);
 					switch(op) {
 					  case 1: if(respuestaA.getText().equals(correcta)) {
 						  		puntos= "10pts";
@@ -111,7 +133,7 @@ public class ControlPregunta {
 					  			}else {
 					  	    		puntos= "0pts";
 					  	    		respuesta= "Respuesta Incorrecta";
-					  	    		colorFondo="#E72323";
+					  	    		colorFondo="#851A1A";
 					  	    	}
 					  			Platform.runLater(new Runnable() {
 					  				@Override public void run() {
@@ -127,7 +149,7 @@ public class ControlPregunta {
 				  			   }else {
 				  	    		puntos= "0pts";
 				  	    		respuesta= "Respuesta Incorrecta";
-				  	    		colorFondo="#E72323";
+				  	    		colorFondo="#851A1A";
 				  			   }
 					  			Platform.runLater(new Runnable() {
 					  				@Override public void run() {
@@ -141,7 +163,7 @@ public class ControlPregunta {
 				  			   }else {
 				  	    		puntos= "0pts";
 				  	    		respuesta= "Respuesta Incorrecta";
-				  	    		colorFondo="#E72323";
+				  	    		colorFondo="#851A1A";
 				  	    	   }
 							  	Platform.runLater(new Runnable() {
 					  				@Override public void run() {
@@ -156,7 +178,7 @@ public class ControlPregunta {
 				  			  }else {
 				  	    		puntos= "0pts";
 				  	    		respuesta= "Respuesta Incorrecta";
-				  	    		colorFondo="#E72323";
+				  	    		colorFondo="#851A1A";
 				  			  }
 							  Platform.runLater(new Runnable() {
 					  				@Override public void run() {
@@ -226,23 +248,15 @@ public class ControlPregunta {
     @FXML
     public void cargarInterfazRespuesta() {
     	try {
-    		arduino.killArduinoConnection();
+    		//arduino.killArduinoConnection();
 			FXMLLoader cargador = new FXMLLoader();
 			cargador.setLocation(Principal.class.getResource("/vistas/respuesta.fxml"));
 			Parent raiz = (Parent)cargador.load();
 			ControlRespuesta control= cargador.getController();
 			control.setStage(escenarioPrincipal);
-			control.cargar(puntos, respuesta, colorFondo);
+			control.cargar(puntos, respuesta, colorFondo,contadorAux,tipo_carta);
 			panelRaiz.getChildren().clear();
 			panelRaiz.getChildren().add(raiz);
-			//EFECTO
-			/*Scene escenario = raiz.getScene();
-			raiz.translateXProperty().set(escenario.getWidth());
-	    	Timeline timeline = new Timeline();
-	    	KeyValue rango = new KeyValue(raiz.translateXProperty(), 0, Interpolator.EASE_BOTH);
-	    	KeyFrame duracion = new KeyFrame(Duration.seconds(0.3), rango);
-	    	timeline.getKeyFrames().add(duracion);
-	    	timeline.play();	*/
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -251,6 +265,7 @@ public class ControlPregunta {
     @FXML
     void regresarInicio(ActionEvent event) {
     	try {
+    		//arduino.killArduinoConnection();
 			FXMLLoader cargador = new FXMLLoader();
 			cargador.setLocation(Principal.class.getResource("/vistas/principal.fxml"));
 			Parent raiz = (Parent)cargador.load();
@@ -259,19 +274,14 @@ public class ControlPregunta {
 			Pane panelCentral = (Pane)((Button)event.getSource()).getParent();
 			panelCentral.getChildren().clear();
 			panelCentral.getChildren().add(raiz);
-			//EFECTO
-			/*Scene escenario = raiz.getScene();
-			raiz.translateXProperty().set(escenario.getWidth());
-	    	Timeline timeline = new Timeline();
-	    	KeyValue rango = new KeyValue(raiz.translateXProperty(), 0, Interpolator.EASE_BOTH);
-	    	KeyFrame duracion = new KeyFrame(Duration.seconds(0.3), rango);
-	    	timeline.getKeyFrames().add(duracion);
-	    	timeline.play();	*/
+		
 			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
     }
+    
+   
    //___________________________________________________________________________________________________ 
     
     public void setStage(Stage escenario) {

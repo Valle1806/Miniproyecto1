@@ -17,10 +17,10 @@ public class Principal extends Application {
 			cargador.setLocation(Principal.class.getResource("/vistas/principal.fxml"));
 			Parent raiz = (Parent)cargador.load();
 			ControlVPrincipal control= cargador.getController();
-			control.setStage(primaryStage);
 			Scene escenario = new Scene(raiz); 
 			primaryStage.setScene(escenario);
 			primaryStage.initStyle(StageStyle.UNDECORATED);	
+			control.setStage(primaryStage);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

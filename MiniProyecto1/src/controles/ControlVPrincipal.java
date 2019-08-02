@@ -44,18 +44,10 @@ public class ControlVPrincipal {
 			cargador.setLocation(Principal.class.getResource("/vistas/esperarCarta.fxml"));
 			Parent raiz = (Parent)cargador.load();
 			ControlEsperaCarta control = cargador.getController();
+			Scene escenario = new Scene(raiz); 
+			escenarioPrincipal.setScene(escenario);
 			control.setStage(escenarioPrincipal);
-			Pane panelCentral = (Pane)((Button)event.getSource()).getParent();
-			panelCentral.getChildren().clear();
-			panelCentral.getChildren().add(raiz);
-			//EFECTO
-			/*Scene escenario = raiz.getScene();
-			raiz.translateXProperty().set(escenario.getWidth());
-	    	Timeline timeline = new Timeline();
-	    	KeyValue rango = new KeyValue(raiz.translateXProperty(), 0, Interpolator.EASE_BOTH);
-	    	KeyFrame duracion = new KeyFrame(Duration.seconds(0.3), rango);
-	    	timeline.getKeyFrames().add(duracion);
-	    	timeline.play();	*/
+			
 			
 		} catch(Exception e) {
 			e.printStackTrace();

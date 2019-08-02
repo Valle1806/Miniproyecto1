@@ -10,10 +10,12 @@ import com.panamahitek.PanamaHitek_Arduino;
 import clases.Pregunta;
 import clases.Principal;
 import clases.Respuesta;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -46,36 +48,33 @@ public class ControlEsperaCarta {
     @FXML
     private JFXButton botonInicio;
     @FXML
-    private JFXButton botonIPregunta;
-    @FXML
     private Label mensajeUbicaCarta;
     @FXML
     private Label nombreCarta;
-    @FXML
-    private MediaView video;
-    private Media me;
+   
     @FXML
     private ImageView imagenCarta;
-    private Pregunta pregunta;
+   
+ 
     private PanamaHitek_Arduino arduino = new PanamaHitek_Arduino();
+    @FXML
+    private MediaView video;
+    
+    private MediaPlayer mediaPlayer;
     
     public void initialize() {  
-    	pregunta= new Pregunta("nel?", new Respuesta[] {
-    			new Respuesta("estemen", false),
-    			new Respuesta("tugfa", false),
-    			new Respuesta("swebok", true),
-    			new Respuesta("crazyneck", false)
-    	});
-    	
     	video.setVisible(true);
-    	/*Media media = new Media(Principal.class.getResource("/imagenes/Saguamanchica.mp4").toExternalForm());
-    	MediaPlayer player = new MediaPlayer(media);
-    	player.play();
-*/      
-        final File f = new File("src/imagenes/Saguamanchica.mp4");
-        MediaPlayer mediaPlayer = new MediaPlayer(new Media(f.toURI().toString()));
-        mediaPlayer.setAutoPlay(true);
-        video.setMediaPlayer(mediaPlayer);
+       	final File f = new File("src/imagenes/Saguamanchica(1).mp4");
+		mediaPlayer = new MediaPlayer(new Media(f.toURI().toString()));
+        video.setMediaPlayer(mediaPlayer); 
+        mediaPlayer.play();
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+            	cambiarAIPregunta(1);
+            }
+        });
+
         try {
 			arduino.arduinoRX("COM12", 9600, comListener);
 		} catch (ArduinoException e) {
@@ -98,10 +97,12 @@ public class ControlEsperaCarta {
 					String opcion = arduino.printMessage();
 					int op = Integer.parseInt(opcion);
 					//fondo.setText(opcion);
+					
 					switch(op) {
 					  case 1: imagenCarta.setVisible(true);
 					  		  mensajeUbicaCarta.setVisible(false);
 					  		  System.out.println("1");
+					  		  
 					          break;
 					  case 2: imagenCarta.setVisible(true);
 					  		  mensajeUbicaCarta.setVisible(false);
@@ -148,6 +149,7 @@ public class ControlEsperaCarta {
     @FXML
     void regresarInicio(ActionEvent event) {
     	try {
+    		mediaPlayer.stop();
 			FXMLLoader cargador = new FXMLLoader();
 			cargador.setLocation(Principal.class.getResource("/vistas/principal.fxml"));
 			Parent raiz = (Parent)cargador.load();
@@ -156,42 +158,26 @@ public class ControlEsperaCarta {
 			Pane panelCentral = (Pane)((Button)event.getSource()).getParent();
 			panelCentral.getChildren().clear();
 			panelCentral.getChildren().add(raiz);
-			//EFECTO
-			/*Scene escenario = raiz.getScene();
-			raiz.translateXProperty().set(escenario.getWidth());
-	    	Timeline timeline = new Timeline();
-	    	KeyValue rango = new KeyValue(raiz.translateXProperty(), 0, Interpolator.EASE_BOTH);
-	    	KeyFrame duracion = new KeyFrame(Duration.seconds(0.3), rango);
-	    	timeline.getKeyFrames().add(duracion);
-	    	timeline.play();	*/
 			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
     }
 
-    @FXML
-    void cambiarAIPregunta(ActionEvent event) {
+   
+    void cambiarAIPregunta(int tipo_carta) {
     	try {
+    		mediaPlayer.stop();
+    		video.setMediaPlayer(null);
 			FXMLLoader cargador = new FXMLLoader();
 			cargador.setLocation(Principal.class.getResource("/vistas/pregunta.fxml"));
 			Parent raiz = (Parent)cargador.load();
 			ControlPregunta control =cargador.getController();
-			arduino.killArduinoConnection();
-			control.inicio(pregunta);
+			//arduino.killArduinoConnection();
+			control.inicio(tipo_carta,1);
+			Scene escenario = new Scene(raiz); 
+			escenarioPrincipal.setScene(escenario);
 			control.setStage(escenarioPrincipal);
-			Pane panelCentral = (Pane)((Button)event.getSource()).getParent();
-			panelCentral.getChildren().clear();
-			panelCentral.getChildren().add(raiz);
-			//EFECTO
-			/*Scene escenario = raiz.getScene();
-			raiz.translateXProperty().set(escenario.getWidth());
-	    	Timeline timeline = new Timeline();
-	    	KeyValue rango = new KeyValue(raiz.translateXProperty(), 0, Interpolator.EASE_BOTH);
-	    	KeyFrame duracion = new KeyFrame(Duration.seconds(0.3), rango);
-	    	timeline.getKeyFrames().add(duracion);
-	    	timeline.play();	*/
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

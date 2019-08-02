@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.media.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.*?>
@@ -27,7 +28,7 @@
             <Font name="Ravie" size="48.0" />
          </font>
       </Label>
-      <Label fx:id="pregunta" layoutX="403.0" layoutY="286.0" text="&lt;pregunta&gt;">
+      <Label fx:id="pregunta" layoutX="349.0" layoutY="288.0" text="&lt;pregunta&gt;">
          <font>
             <Font name="Ravie" size="24.0" />
          </font>

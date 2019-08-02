@@ -22,17 +22,12 @@
             <Image url="@../imagenes/niño%20explorador.png" />
          </image>
       </ImageView>
-      <Label layoutX="221.0" layoutY="53.0" prefHeight="25.0" prefWidth="622.0" stylesheets="@../estilos/estilo.css" text="Cultura Muisca" textFill="#c8b46d">
-         <font>
-            <Font name="Ravie" size="48.0" />
-         </font>
-      </Label>
-      <Label layoutX="247.0" layoutY="114.0" prefHeight="25.0" prefWidth="622.0" text="al descubierto" textFill="#c8b46d">
-         <font>
-            <Font name="Ravie" size="48.0" />
-         </font>
-      </Label>
-      <JFXButton fx:id="botonA" layoutX="347.0" layoutY="237.0" onAction="#mostrarEsperarCarta" prefHeight="72.0" prefWidth="153.0" ripplerFill="#e3222202" style="-fx-background-color: #c8b46d;" text="Opcion A" />
-      <JFXButton layoutX="515.0" layoutY="237.0" prefHeight="72.0" prefWidth="153.0" style="-fx-background-color: c8b46d;" text="Opcion B" />
+      <JFXButton fx:id="botonA" layoutX="347.0" layoutY="237.0" onAction="#mostrarEsperarCarta" prefHeight="72.0" prefWidth="153.0" ripplerFill="#e3222202" style="-fx-graphic: url('/imagenes/opcionA.png');" text="Opcion A" />
+      <JFXButton layoutX="515.0" layoutY="237.0" prefHeight="72.0" prefWidth="153.0" style="-fx-graphic: url('/imagenes/opcionB.png');" text="Opcion B" />
+      <ImageView fitHeight="167.0" fitWidth="559.0" layoutX="216.0" layoutY="37.0">
+         <image>
+            <Image url="@../imagenes/titulo.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

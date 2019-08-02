@@ -4,11 +4,15 @@ import java.util.Optional;
 
 import com.jfoenix.controls.JFXButton;
 
+import clases.Pregunta;
 import clases.Principal;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -18,6 +22,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class ControlRespuesta {
 	private Stage escenarioPrincipal;
@@ -43,12 +48,26 @@ public class ControlRespuesta {
 
     @FXML
     private Label puntos;
+    private int contador;
 
-    public void cargar(String puntoss,String respuestaa,String fondo) {
+    public void cargar(String puntoss,String respuestaa,String fondo,int contadorr,int tipo_carta) {
     	String estilo = "-fx-background-color:"+ fondo+";";
     	panelRaiz.setStyle(estilo);
     	puntos.setText(puntoss);
     	respuesta.setText(respuestaa);
+    	this.contador= contadorr;
+    	if(contador>=3) {
+    		PauseTransition delay = new PauseTransition(Duration.seconds(5));
+    		delay.setOnFinished( event -> mostrarEsperarCarta() );
+    		delay.play();
+    		
+    	}else {
+    		contador++;
+    		PauseTransition delay = new PauseTransition(Duration.seconds(5));
+    		delay.setOnFinished( event -> cambiarAIPregunta(tipo_carta,contador));
+    		delay.play();
+    		
+    	}
     }
     
     
@@ -101,18 +120,40 @@ public class ControlRespuesta {
 			Pane panelCentral = (Pane)((Button)event.getSource()).getParent();
 			panelCentral.getChildren().clear();
 			panelCentral.getChildren().add(raiz);
-			//EFECTO
-			/*Scene escenario = raiz.getScene();
-			raiz.translateXProperty().set(escenario.getWidth());
-	    	Timeline timeline = new Timeline();
-	    	KeyValue rango = new KeyValue(raiz.translateXProperty(), 0, Interpolator.EASE_BOTH);
-	    	KeyFrame duracion = new KeyFrame(Duration.seconds(0.3), rango);
-	    	timeline.getKeyFrames().add(duracion);
-	    	timeline.play();	*/
-			
+		
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+    }
+    void cambiarAIPregunta(int tipo_carta, int contador ) {
+    	try {
+    		
+			FXMLLoader cargador = new FXMLLoader();
+			cargador.setLocation(Principal.class.getResource("/vistas/pregunta.fxml"));
+			Parent raiz = (Parent)cargador.load();
+			ControlPregunta control =cargador.getController();
+			control.inicio(tipo_carta,contador);
+			Scene escenario = new Scene(raiz); 
+			escenarioPrincipal.setScene(escenario);
+			control.setStage(escenarioPrincipal);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+    }
+   
+    void mostrarEsperarCarta() {
+    	try {
+			FXMLLoader cargador = new FXMLLoader();
+			cargador.setLocation(Principal.class.getResource("/vistas/esperarCarta.fxml"));
+			Parent raiz = (Parent)cargador.load();
+			ControlEsperaCarta control = cargador.getController();
+			Scene escenario = new Scene(raiz); 
+			escenarioPrincipal.setScene(escenario);
+			control.setStage(escenarioPrincipal);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+    	
     }
 
 }

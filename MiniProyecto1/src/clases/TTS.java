@@ -8,7 +8,7 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
 public class TTS {
-	public static void speak(String text) {
+	private static void speakAux(String text){
 		Thread thread = new Thread(() -> {
 			try {
 				AdvancedPlayer player = new AdvancedPlayer(
@@ -20,5 +20,20 @@ public class TTS {
 		});
 		thread.setDaemon(false);
 		thread.start();
-	}	
+	}
+	
+	public static void speak(String text) {
+		speakAux(text);
+	}
+	
+	public static void speak(Pregunta p) {
+		speakAux(
+				"Sección de preguntas, " + p.getPregunta()+ 
+				"Opción A. "+ p.getRespuestas()[0] +
+				"Opción B. "+ p.getRespuestas()[1] +
+				"Opción C. "+ p.getRespuestas()[2] +
+				"Opción D. "+ p.getRespuestas()[3] +
+				"Use las cartas de respuesta"
+		);
+	}
 }

@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.jfoenix.controls.JFXButton;
 
 import clases.Principal;
+import clases.TTS;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -35,7 +36,12 @@ public class ControlVPrincipal {
     @FXML
     private JFXButton botonCerrar;
     
-    
+    @FXML
+    private void initialize(){
+    	TTS.speak("Bienvenido al juego Cultura muisca al descubierto, "
+				+ "Si desea entrar al juego de preguntas coloque la carta de la opción A,"
+				+ "Si desea jugar piedra papel o tijera coloque la carta de la opción B");
+    }
 
     @FXML
     void mostrarEsperarCarta(ActionEvent event) {

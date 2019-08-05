@@ -10,6 +10,7 @@ import com.panamahitek.PanamaHitek_Arduino;
 import clases.Pregunta;
 import clases.Principal;
 import clases.Respuesta;
+import clases.TTS;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -79,6 +80,9 @@ public class ControlPregunta {
     			correcta=respuestas[i].getRespuesta();
     		}
     	}
+    	
+    	TTS.speak(preguntas[tipo_carta]);
+    	
     	respuestaA.setWrapText(true);
     	respuestaA.setText(respuestas[0].getRespuesta());
     	respuestaA.setTextFill(Color.WHITE);
@@ -131,7 +135,7 @@ public class ControlPregunta {
     			new Respuesta("Lago de la tota", false),
     			new Respuesta("Laguna de Tibatiquica", false)
     	});
-    	preguntas[2]= new Pregunta("¿Quién es Bachué?", new Respuesta[] {
+    	preguntas[3]= new Pregunta("¿Quién es Bachué?", new Respuesta[] {
     			new Respuesta("La diosa de la luna", false),
     			new Respuesta("La diosa del trigo", false),
     			new Respuesta("La madre del pueblo Muisca", true),

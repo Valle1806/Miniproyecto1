@@ -67,7 +67,7 @@ public class ControlEsperaCarta {
     
     public void initialize() {  
     	video.setVisible(true);
-       	TTS.speak("Por favor coloque una carta de un personaje para conocer acerca de él");
+       	TTS.speak("Coloca la carta de un personaje para conocer acerca de él");
 
         try {
 			arduino.arduinoRX("COM12", 9600, comListener);

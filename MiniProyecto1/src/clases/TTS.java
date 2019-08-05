@@ -13,7 +13,7 @@ public class TTS {
 			try {
 				AdvancedPlayer player = new AdvancedPlayer(
 						new SynthesiserV2("AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw").getMP3Data(text));
-				player.play();
+						player.play();
 			} catch (IOException | JavaLayerException e) {
 				e.printStackTrace(); 
 			}

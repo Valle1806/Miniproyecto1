@@ -10,6 +10,7 @@ import com.panamahitek.PanamaHitek_Arduino;
 import clases.Pregunta;
 import clases.Principal;
 import clases.Respuesta;
+import clases.TTS;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -66,7 +67,7 @@ public class ControlEsperaCarta {
     
     public void initialize() {  
     	video.setVisible(true);
-       	
+       	TTS.speak("Por favor coloque una carta de un personaje para conocer acerca de él");
 
         try {
 			arduino.arduinoRX("COM12", 9600, comListener);

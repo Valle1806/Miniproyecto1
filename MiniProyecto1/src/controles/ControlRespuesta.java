@@ -75,7 +75,6 @@ public class ControlRespuesta {
     }
     
     
-    
     public void setStage(Stage escenario) {
     	this.escenarioPrincipal = escenario;
     }

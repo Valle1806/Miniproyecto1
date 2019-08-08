@@ -66,6 +66,7 @@ public class ControlPregunta {
     private Pregunta[] preguntas= new Pregunta[18];
     
     private int tipo_carta;
+    private TTS voz = new TTS();
     
     
     public void inicio(int tipo_carta, int contador) {
@@ -81,7 +82,7 @@ public class ControlPregunta {
     		}
     	}
     	
-    	TTS.speak(preguntas[tipo_carta]);
+    	voz.speak(preguntas[tipo_carta]);
     	
     	respuestaA.setWrapText(true);
     	respuestaA.setText(respuestas[0].getRespuesta());
@@ -106,7 +107,7 @@ public class ControlPregunta {
     	respuestaD.setTextFill(Color.WHITE);
     	
     	try {
-			arduino.arduinoRX("COM12", 9600, comListener);
+			arduino.arduinoRX(Parameters.COM_PORT, 9600, comListener);
 		} catch (ArduinoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

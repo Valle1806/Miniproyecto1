@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXButton;
 
 import clases.Pregunta;
 import clases.Principal;
+import clases.TTS;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -26,8 +27,8 @@ import javafx.util.Duration;
 
 public class ControlRespuesta {
 	private Stage escenarioPrincipal;
-	
-	private double x, y;	
+	private double x, y;
+	private TTS voz = new TTS();
 	
     @FXML
     private Pane panelRaiz;
@@ -50,6 +51,7 @@ public class ControlRespuesta {
     private Label puntos;
     private int contador;
     private int tipo_carta;
+    private PauseTransition delay;
 
     public void cargar(String puntoss,String respuestaa,String fondo,int contadorr,int tipo_carta) {
     	String estilo = "-fx-background-color:"+ fondo+";";
@@ -61,13 +63,14 @@ public class ControlRespuesta {
     	this.tipo_carta++;
     	
     	if(contador>=3) {
-    		PauseTransition delay = new PauseTransition(Duration.seconds(5));
+    		delay = new PauseTransition(Duration.seconds(5));
     		delay.setOnFinished( event -> mostrarEsperarCarta() );
     		delay.play();
     		
-    	}else {
+    	}else { 
+    		voz.stop();
     		contador++;
-    		PauseTransition delay = new PauseTransition(Duration.seconds(5));
+    		delay = new PauseTransition(Duration.seconds(5));
     		delay.setOnFinished( event -> cambiarAIPregunta(this.tipo_carta,contador));
     		delay.play();
     		
@@ -98,6 +101,7 @@ public class ControlRespuesta {
 //Cerrar la aplicación
     @FXML
     void cerrar(ActionEvent event) {
+    	voz.stop();
     	Alert alert = new Alert(AlertType.WARNING);
     	alert.setHeaderText("Está a punto de cerrar la aplicación");
     	alert.setContentText("¿Está seguro de que desea salir?");
@@ -113,6 +117,8 @@ public class ControlRespuesta {
     @FXML
     void regresarInicio(ActionEvent event) {
     	try {
+    		voz.stop();
+    		delay.stop();
     		String estilo = "-fx-background-color: #fff;";
         	panelRaiz.setStyle(estilo);
 			FXMLLoader cargador = new FXMLLoader();
@@ -130,7 +136,7 @@ public class ControlRespuesta {
     }
     void cambiarAIPregunta(int tipo_carta, int contador ) {
     	try {
-    		
+    		voz.stop();
 			FXMLLoader cargador = new FXMLLoader();
 			cargador.setLocation(Principal.class.getResource("/vistas/pregunta.fxml"));
 			Parent raiz = (Parent)cargador.load();
@@ -146,6 +152,7 @@ public class ControlRespuesta {
    
     void mostrarEsperarCarta() {
     	try {
+    		voz.stop();
 			FXMLLoader cargador = new FXMLLoader();
 			cargador.setLocation(Principal.class.getResource("/vistas/esperarCarta.fxml"));
 			Parent raiz = (Parent)cargador.load();

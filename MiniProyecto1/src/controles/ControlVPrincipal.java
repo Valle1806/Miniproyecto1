@@ -11,6 +11,7 @@ import clases.TTS;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -45,7 +46,6 @@ public class ControlVPrincipal {
 	@FXML
 	private JFXButton botonCerrar;
 
-	
 	private void connectArduino() {
 		try {
 			arduino.arduinoRX(Parameters.COM_PORT, 9600, comListener);
@@ -55,13 +55,14 @@ public class ControlVPrincipal {
 			System.out.println("Arduino connection error");
 		}
 	}
-	
+
 	@FXML
 	private void initialize() {
 		voz.speak("Bienvenido al juego Cultura muisca al descubierto, "
 				+ "Si desea entrar al juego de preguntas coloque la carta de la opción A,"
 				+ "Si desea jugar piedra papel o tijera coloque la carta de la opción B");
 
+		
 		connectArduino();
 	}
 
@@ -72,8 +73,7 @@ public class ControlVPrincipal {
 
 			try {
 				boolean accepted = true;
-				while (accepted) { // debe preguntar por una carta hasta que se ponga la correcta
-					connectArduino();
+				while (accepted) {
 					if (arduino.isMessageAvailable()) {
 						String opcion = arduino.printMessage();
 						System.out.println(opcion);
@@ -82,14 +82,11 @@ public class ControlVPrincipal {
 						switch (op) {
 						case 1:
 							accepted = false;
-							arduino.killArduinoConnection();
 							voz.stop();
-							Platform.runLater(new Runnable() {
-								@Override
-								public void run() {
-									mostrarEsperarCartaAux();
-								}
-							});
+							voz.speak("Opción A seleccionada");
+							PauseTransition delay = new PauseTransition(Duration.seconds(3));
+							delay.setOnFinished(event -> mostrarEsperarCartaAux());
+							delay.play();
 
 							break;
 						case 2:
@@ -99,7 +96,7 @@ public class ControlVPrincipal {
 							break;
 						default:
 							voz.speak("Carta equivocada, por favor use la carta A o B");
-							arduino.killArduinoConnection();
+							// arduino.killArduinoConnection();
 							break;
 						}//
 
@@ -116,6 +113,7 @@ public class ControlVPrincipal {
 
 	private void mostrarEsperarCartaAux() {
 		try {
+			arduino.killArduinoConnection();
 			FXMLLoader cargador = new FXMLLoader();
 			cargador.setLocation(Principal.class.getResource("/vistas/esperarCarta.fxml"));
 			Parent raiz = (Parent) cargador.load();
@@ -131,6 +129,7 @@ public class ControlVPrincipal {
 
 	@FXML
 	void mostrarEsperarCarta(ActionEvent event) {
+		voz.stop();
 		mostrarEsperarCartaAux();
 	}
 
@@ -144,6 +143,7 @@ public class ControlVPrincipal {
 //Cerrar la aplicación
 	@FXML
 	void cerrar(ActionEvent event) {
+		voz.stop();
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setHeaderText("Está a punto de cerrar la aplicación");
 		alert.setContentText("¿Está seguro de que desea salir?");

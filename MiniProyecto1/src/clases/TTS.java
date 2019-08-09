@@ -43,7 +43,7 @@ public class TTS {
 				System.out.println("No internet, no TTS");
 			}
 		});
-		thread.setDaemon(false);
+		thread.setDaemon(true);
 		thread.start();
 	}
 

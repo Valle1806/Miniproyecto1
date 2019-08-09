@@ -1,5 +1,6 @@
 package controles;
 
+import java.awt.ImageCapabilities;
 import java.io.File;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import clases.Pregunta;
 import clases.Principal;
 import clases.Respuesta;
 import clases.TTS;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,6 +32,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import jssc.SerialPortEvent;
 import jssc.SerialPortEventListener;
 import jssc.SerialPortException;
@@ -82,7 +85,7 @@ public class ControlEsperaCarta {
 		}
 	}
 
-	void mostrarVideo(String nombre_video) {
+	void mostrarVideo(String nombre_video,int cartNumber) {
 		voz.stop();
 		reproducion_video = true;
 		final File f = new File("src/videos/" + nombre_video + ".mp4");
@@ -93,28 +96,36 @@ public class ControlEsperaCarta {
 		mediaPlayer.setOnEndOfMedia(new Runnable() {
 			@Override
 			public void run() {
-				cambiarAIPregunta(0);
+				cambiarAIPregunta(cartNumber);
 			}
 		});
 	}
-	
-	private void putCart(String cartName){
-		File file = new File("src/imagenes/cartas/"+cartName+".jpg");
+
+	private void putCart(String cartName) {
+		File file = new File("src/imagenes/cartas/" + cartName + ".png");
+		System.out.println(file.toURI().toString());
 		Image image = new Image(file.toURI().toString());
-		imagenCarta = new ImageView(image);
+		imagenCarta.setImage(image);
 		imagenCarta.setVisible(true);
 		mensajeUbicaCarta.setVisible(false);
+		
+//		imagenCarta = new ImageView(image);
+//		imagenCarta.setVisible(true);
+//		
 	}
-	
-	private void playVideoAfterCard(String cartName) {
+
+	private void playVideoAfterCard(String cartName,int cartNumber) {
 		voz.stop();
-		putCart(cartName);
-		mostrarVideo("ayuda");
 		try {
 			arduino.killArduinoConnection();
 		} catch (Exception e) {
 			System.out.println("arduino doesn't stoped");
 		}
+		putCart(cartName);
+		voz.speak("Personaje " + cartName + "selecionado, Escucha el siguiente video con atención");
+		PauseTransition delay = new PauseTransition(Duration.seconds(6));
+		delay.setOnFinished( event -> mostrarVideo(cartName, cartNumber) );
+		delay.play();
 	}
 
 	private SerialPortEventListener comListener = new SerialPortEventListener() {
@@ -123,61 +134,45 @@ public class ControlEsperaCarta {
 			// TODO Auto-generated method stub
 
 			try {
-				if (arduino.isMessageAvailable()) {
-					String opcion = arduino.printMessage();
-					int op = Integer.parseInt(opcion);
-					// fondo.setText(opcion);
+				boolean accepted = true;
+				while (accepted) {
+					if (arduino.isMessageAvailable()) {
+						String opcion = arduino.printMessage();
+						int op = Integer.parseInt(opcion);
+						// fondo.setText(opcion);
+						voz.stop();
+						switch (op) {
+						case 5:
+							playVideoAfterCard("saguamanchica",0);
+							accepted=false;
+							break;
+						case 6:
+							playVideoAfterCard("bachue",3);
+							accepted=false;
+							break;
+						case 7:
+							playVideoAfterCard("hunzahua",6);
+							accepted=false;
+							break;
+						case 8:
+							playVideoAfterCard("goranchacha",9);
+							accepted=false;
+							break;
+						case 9:
+							playVideoAfterCard("nemequene",12);
+							accepted=false;
+							break;
+						case 10:
+							playVideoAfterCard("bochica",15);
+							accepted=false;
+							break;
+						default:
+							voz.speak("Carta equivocada");
+						
+							break;
+						}//
 
-					switch (op) {
-					case 5:
-						playVideoAfterCard("saguamanchica");
-						break;
-					case 6:
-						voz.stop();
-						imagenCarta.setVisible(true);
-						mostrarVideo("ayuda");
-						mensajeUbicaCarta.setVisible(false);
-						arduino.killArduinoConnection();
-						System.out.println("6");
-						break;
-					case 7:
-						voz.stop();
-						imagenCarta.setVisible(true);
-						mostrarVideo("ayuda");
-						mensajeUbicaCarta.setVisible(false);
-						arduino.killArduinoConnection();
-						System.out.println("7");
-						break;
-					case 8:
-						voz.stop();
-						imagenCarta.setVisible(true);
-						mostrarVideo("ayuda");
-						mensajeUbicaCarta.setVisible(false);
-						arduino.killArduinoConnection();
-						System.out.println("8");
-						break;
-					case 9:
-						voz.stop();
-						imagenCarta.setVisible(true);
-						mostrarVideo("ayuda");
-						mensajeUbicaCarta.setVisible(false);
-						arduino.killArduinoConnection();
-						System.out.println("9");
-						break;
-					case 10:
-						voz.stop();
-						imagenCarta.setVisible(true);
-						mostrarVideo("ayuda");
-						mensajeUbicaCarta.setVisible(false);
-						arduino.killArduinoConnection();
-						System.out.println("10");
-						break;
-					default:
-						voz.speak("Carta equivocada");
-						arduino.killArduinoConnection();
-						break;
-					}//
-
+					}
 				}
 			} catch (SerialPortException | ArduinoException e) {
 				// TODO Auto-generated catch block
@@ -194,6 +189,7 @@ public class ControlEsperaCarta {
 				mediaPlayer.stop();
 			}
 			voz.stop();
+			arduino.killArduinoConnection();
 			FXMLLoader cargador = new FXMLLoader();
 			cargador.setLocation(Principal.class.getResource("/vistas/principal.fxml"));
 			Parent raiz = (Parent) cargador.load();

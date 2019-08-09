@@ -1,0 +1,4 @@
+personaje puntaje hora/fecha
+goranchancha 2500 "10 de Marzo de  2018, 08:86 am"
+bachue 1150 "09 de Agosto de 2019, 11:18 am"
+bachue 350 "10 de Febrero de 2019, 08:41 pm"

@@ -1,5 +1,6 @@
 package controles;
 
+import java.io.File;
 import java.util.Optional;
 
 import com.jfoenix.controls.JFXButton;
@@ -20,6 +21,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
@@ -75,7 +77,7 @@ public class ControlPPT {
 	
 	private String eleccionJ1,eleccionJ2;
 	
-
+	
     private void connectArduino() {
 		try {
 			arduino.arduinoRX(Parameters.COM_PORT, 9600, comListener);
@@ -92,6 +94,14 @@ public class ControlPPT {
     }
     
     public void mostrarResultado(String ganador) {
+    	File file = new File("src/imagenes/" + eleccionJ1 + ".png");
+    	Image imagej1 = new Image(file.toURI().toString());
+		imagenJ1.setImage(imagej1);
+		
+		File file2 = new File("src/imagenes/" + eleccionJ2 + ".png");
+    	Image imagej2 = new Image(file2.toURI().toString());
+		imagenJ2.setImage(imagej2);
+    	
     	voz.speak("jugador uno eligió "+ eleccionJ1 +" y jugador 2 eligió "+ eleccionJ2+ " " + ganador);
     	labelTurnoJ2.setVisible(false);
     	labelTurnoJ1.setVisible(false);

@@ -35,10 +35,26 @@
             <Font name="Georgia" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="140.0" layoutY="186.0" text="Explicacion">
+      <Label layoutX="211.0" layoutY="176.0" text="Descripción del juego">
          <font>
             <Font name="Georgia" size="29.0" />
          </font>
+      </Label>
+      <Label layoutX="214.0" layoutY="178.0" text="Descripción del juego">
+         <font>
+            <Font name="Georgia" size="29.0" />
+         </font>
+         <effect>
+            <Shadow />
+         </effect>
+      </Label>
+      <Label fx:id="labeltexto1" layoutX="213.0" layoutY="229.0" prefHeight="400.0" prefWidth="588.0" text="El juego Cultura Muisca al Descubierto es una aplicación interactiva donde podrás aprender sobre la cultura Muisca mientras te diviertes. Para hacer uso de las distintas funciones que ofrece esta aplicación se requieren dos tipos de carta: las cartas de personaje y las cartas de opción de respuesta. Las cartas tienen escrito la información de la carta en braile, el cual se lee teniendo la carta en posición horizontal. En la parte superior de las cartas encontrarás el nombre de la carta. Las cartas de personaje tienen una línea de braile adicional en la parte inferior que contiene una de los tres símbolos: piedra, papel o tijera. Puedes jugar al modo Quiz, donde debes primero poner una carta de personaje encima del sensor para conocer su historia, y a continuación responder una pregunta utilizando una de las cartas de opción de respuesta.También puedes jugar al clásico juego piedra papel o tijera, poniendo encima del sensor la carta que contiene el símbolo que deseas utilizar. ¡Ten cuidado! Procura que la cara donde está impreso el braile no sea visto por tu oponente. Eso es todo, hasta luego. Diviértete mucho" wrapText="true">
+         <font>
+            <Font name="Georgia" size="19.0" />
+         </font>
+         <effect>
+            <Shadow radius="21.86" width="68.44" />
+         </effect>
       </Label>
    </children>
 </Pane>

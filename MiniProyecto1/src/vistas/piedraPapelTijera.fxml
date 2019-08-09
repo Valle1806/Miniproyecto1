@@ -12,7 +12,7 @@
 
 <Pane fx:id="panelRaiz" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#moverPanel" onMousePressed="#copiarCoordenadas" prefHeight="665.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controles.ControlPPT">
    <children>
-      <ImageView fitHeight="665.0" fitWidth="1006.0" layoutX="11.0" opacity="0.29">
+      <ImageView fitHeight="665.0" fitWidth="1006.0" layoutX="-3.0" opacity="0.29">
          <image>
             <Image url="@../imagenes/fondo.jpg" />
          </image>
@@ -25,34 +25,34 @@
             <Image url="@../../bin/imagenes/titulo.png" />
          </image>
       </ImageView>
-      <Label fx:id="labelTurnoJ1" layoutX="141.0" layoutY="236.0" prefHeight="47.0" prefWidth="691.0" text="Turno Jugador 1" textAlignment="JUSTIFY">
+      <Label fx:id="labelTurnoJ1" layoutX="171.0" layoutY="236.0" prefHeight="47.0" prefWidth="691.0" text="Turno Jugador 1" textAlignment="JUSTIFY">
          <font>
             <Font name="Georgia" size="41.0" />
          </font>
       </Label>
-      <Label fx:id="labelTurnoJ2" layoutX="325.0" layoutY="333.0" prefHeight="47.0" prefWidth="330.0" text="Turno Jugador 2" visible="false">
+      <Label fx:id="labelTurnoJ2" layoutX="355.0" layoutY="333.0" prefHeight="47.0" prefWidth="330.0" text="Turno Jugador 2" visible="false">
          <font>
             <Font name="Georgia" size="41.0" />
          </font>
       </Label>
-      <ImageView fx:id="imagenJ1" fitHeight="269.0" fitWidth="245.0" layoutX="146.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true" visible="false" />
-      <ImageView fx:id="imagenJ2" fitHeight="269.0" fitWidth="245.0" layoutX="540.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true" visible="false" />
-      <Label fx:id="labelvs" layoutX="449.0" layoutY="385.0" text="Vs" visible="false">
+      <ImageView fx:id="imagenJ1" fitHeight="269.0" fitWidth="245.0" layoutX="176.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView fx:id="imagenJ2" fitHeight="269.0" fitWidth="245.0" layoutX="570.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <Label fx:id="labelvs" layoutX="479.0" layoutY="385.0" text="Vs" visible="false">
          <font>
             <Font name="Georgia" size="26.0" />
          </font>
       </Label>
-      <Label fx:id="labelGanador" layoutX="385.0" layoutY="556.0" text="Gana jugador 1" visible="false">
+      <Label fx:id="labelGanador" layoutX="415.0" layoutY="556.0" text="Gana jugador 1" visible="false">
          <font>
             <Font name="Georgia" size="28.0" />
          </font>
       </Label>
-      <Label fx:id="labeLJ1" layoutX="232.0" layoutY="527.0" text="Jugador 1" visible="false">
+      <Label fx:id="labeLJ1" layoutX="262.0" layoutY="527.0" text="Jugador 1" visible="false">
          <font>
             <Font name="Georgia" size="22.0" />
          </font>
       </Label>
-      <Label fx:id="labelLJ2" layoutX="617.0" layoutY="527.0" prefHeight="25.0" prefWidth="115.0" text="Jugador 2 " visible="false">
+      <Label fx:id="labelLJ2" layoutX="647.0" layoutY="527.0" prefHeight="25.0" prefWidth="115.0" text="Jugador 2 " visible="false">
          <font>
             <Font name="Georgia" size="22.0" />
          </font>

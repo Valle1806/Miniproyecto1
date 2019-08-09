@@ -22,16 +22,16 @@
             <Image url="@../imagenes/niño%20explorador.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="botonA" layoutX="260.0" layoutY="237.0" onAction="#mostrarEsperarCarta" prefHeight="72.0" prefWidth="153.0" ripplerFill="#e3222202" style="-fx-graphic: url('/imagenes/opcionA.png');" text=" ">
+      <JFXButton fx:id="botonA" layoutX="262.0" layoutY="237.0" onAction="#mostrarEsperarCarta" prefHeight="72.0" prefWidth="153.0" ripplerFill="#e3222202" style="-fx-graphic: url('/imagenes/opcionA.png');" text=" ">
          <effect>
             <Reflection />
          </effect></JFXButton>
       <JFXButton fx:id="botonB" layoutX="437.0" layoutY="237.0" onAction="#mostrarPPT" prefHeight="72.0" prefWidth="153.0" style="-fx-graphic: url('/imagenes/opcionB.png');" text=" " />
+      <JFXButton fx:id="botonC" layoutX="615.0" layoutY="237.0" onAction="#mostrarInformacion" prefHeight="72.0" prefWidth="153.0" style="-fx-graphic: url('/imagenes/opcionC.png');" text=" " />
       <ImageView fitHeight="158.0" fitWidth="529.0" layoutX="249.0" layoutY="65.0">
          <image>
             <Image url="@../imagenes/titulo.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="botonC" layoutX="628.0" layoutY="237.0" onAction="#mostrarInformacion" prefHeight="72.0" prefWidth="153.0" style="-fx-graphic: url('/imagenes/opcionB.png');" text=" " />
    </children>
 </Pane>

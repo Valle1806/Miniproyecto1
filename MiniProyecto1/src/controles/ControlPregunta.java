@@ -150,7 +150,7 @@ public class ControlPregunta {
 		preguntas[4] = new Pregunta("¿Quién es Bachué?",
 				new Respuesta[] { new Respuesta("La diosa de la luna", false),
 						new Respuesta("La diosa del trigo", false), new Respuesta("La madre del pueblo Muisca", true),
-						new Respuesta("Una cacique", false) });
+						new Respuesta("Una cacique", false) }); 
 		
 		preguntas[5] = new Pregunta("¿Qué habilidades transmitió Bachué a sus descendientes?",
 				new Respuesta[] { new Respuesta("Trabajar las piedras, manipular el fuego, recolectar y cazar alimentos", true), new Respuesta("Ciencia y astronomía", false),

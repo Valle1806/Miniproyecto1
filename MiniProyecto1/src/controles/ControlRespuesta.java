@@ -115,7 +115,7 @@ public class ControlRespuesta {
 
     	Optional<ButtonType> result = alert.showAndWait();
     	if (result.get() == ButtonType.OK){
-    	    System.exit(1);
+    	    System.exit(1); 
     	}
     }
 

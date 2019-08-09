@@ -64,7 +64,9 @@ public class ControlVPrincipal {
 	private void initialize() {
 		voz.speak("Bienvenido al juego Cultura muisca al descubierto, "
 				+ "Si desea entrar al juego de preguntas coloque la carta de la opción A,"
-				+ "Si desea jugar piedra papel o tijera coloque la carta de la opción B");
+				+ "Si desea jugar piedra papel o tijera coloque la carta de la opción B,"
+				+ "Si desea obtener las instrucciones de la aplicación coloque la carta de la opción C, "
+				+ "Si desea escuchar los puntajes obtenido coloque la cara de la opción C");
 
 		
 		connectArduino();

@@ -1,5 +1,6 @@
 package controles;
 
+import java.io.File;
 import java.util.Optional;
 
 import com.jfoenix.controls.JFXButton;
@@ -18,6 +19,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
@@ -55,6 +57,11 @@ public class ControlRespuesta {
 
     public void cargar(String puntoss,String respuestaa,String fondo,int contadorr,int tipo_carta) {
     	String estilo = "-fx-background-color:"+ fondo+";";
+    
+    	File file = new File("src/imagenes/" + respuestaa + ".png");
+    	Image image = new Image(file.toURI().toString());
+   		imagenRespuesta.setImage(image);
+    	
     	panelRaiz.setStyle(estilo);
     	puntos.setText(puntoss);
     	respuesta.setText(respuestaa);

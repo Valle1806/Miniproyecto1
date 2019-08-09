@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<Pane fx:id="panelRaiz" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#moverPanel" onMousePressed="#copiarCoordenadas" prefHeight="665.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controles.ControlPPT">
+   <children>
+      <ImageView fitHeight="665.0" fitWidth="1006.0" layoutX="11.0" opacity="0.29">
+         <image>
+            <Image url="@../imagenes/fondo.jpg" />
+         </image>
+      </ImageView>
+      <JFXButton id="botonCerrar" fx:id="botonCerrar" layoutX="969.0" layoutY="2.0" onAction="#cerrar" prefHeight="25.0" prefWidth="25.0" style="-fx-graphic: url('/imagenes/close.png');" text=" " />
+      <JFXButton id="botonMinimizar" fx:id="botonMinimizar" layoutX="935.0" layoutY="3.0" onAction="#minimizar" prefHeight="25.0" prefWidth="25.0" ripplerFill="WHITE" style="-fx-graphic: url('/imagenes/minimize.png');" text=" " />
+      <JFXButton fx:id="botonInicio" layoutX="44.0" layoutY="27.0" onAction="#regresarInicio" prefHeight="61.0" prefWidth="70.0" style="-fx-graphic: url('/imagenes/inicio.png');" text="  " />
+      <ImageView fitHeight="128.0" fitWidth="509.0" layoutX="246.0" layoutY="29.0">
+         <image>
+            <Image url="@../../bin/imagenes/titulo.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="labelTurnoJ1" layoutX="141.0" layoutY="236.0" prefHeight="47.0" prefWidth="691.0" text="Turno Jugador 1" textAlignment="JUSTIFY">
+         <font>
+            <Font name="Georgia" size="41.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelTurnoJ2" layoutX="325.0" layoutY="333.0" prefHeight="47.0" prefWidth="330.0" text="Turno Jugador 2" visible="false">
+         <font>
+            <Font name="Georgia" size="41.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imagenJ1" fitHeight="269.0" fitWidth="245.0" layoutX="146.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView fx:id="imagenJ2" fitHeight="269.0" fitWidth="245.0" layoutX="540.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <Label fx:id="labelvs" layoutX="449.0" layoutY="385.0" text="Vs" visible="false">
+         <font>
+            <Font name="Georgia" size="26.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelGanador" layoutX="385.0" layoutY="556.0" text="Gana jugador 1" visible="false">
+         <font>
+            <Font name="Georgia" size="28.0" />
+         </font>
+      </Label>
+      <Label fx:id="labeLJ1" layoutX="232.0" layoutY="527.0" text="Jugador 1" visible="false">
+         <font>
+            <Font name="Georgia" size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelLJ2" layoutX="617.0" layoutY="527.0" prefHeight="25.0" prefWidth="115.0" text="Jugador 2 " visible="false">
+         <font>
+            <Font name="Georgia" size="22.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

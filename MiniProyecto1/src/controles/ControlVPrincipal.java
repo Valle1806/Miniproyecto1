@@ -43,6 +43,10 @@ public class ControlVPrincipal {
 	private JFXButton botonMinimizar;
 	@FXML
 	private JFXButton botonA;
+    @FXML
+    private JFXButton botonB;
+    @FXML
+    private JFXButton botonC;
 	@FXML
 	private JFXButton botonCerrar;
 
@@ -84,14 +88,26 @@ public class ControlVPrincipal {
 							accepted = false;
 							voz.stop();
 							voz.speak("Opción A seleccionada");
-							PauseTransition delay = new PauseTransition(Duration.seconds(3));
+							arduino.killArduinoConnection();
+							PauseTransition delay = new PauseTransition(Duration.seconds(2));
 							delay.setOnFinished(event -> mostrarEsperarCartaAux());
 							delay.play();
 
 							break;
 						case 2:
+							voz.speak("Opción B seleccionada");
 							arduino.killArduinoConnection();
-							System.out.println("2");
+							PauseTransition delay1 = new PauseTransition(Duration.seconds(2));
+							delay1.setOnFinished(event -> mostrarPPTAux());
+							delay1.play();
+							accepted = false;
+							break;
+						case 3:
+							voz.speak("Opción C seleccionada");
+							arduino.killArduinoConnection();
+							PauseTransition delay2 = new PauseTransition(Duration.seconds(2));
+							delay2.setOnFinished(event -> mostrarInformacionAux());
+							delay2.play();
 							accepted = false;
 							break;
 						default:
@@ -111,9 +127,59 @@ public class ControlVPrincipal {
 		}
 	};
 
-	private void mostrarEsperarCartaAux() {
+	@FXML
+    void mostrarPPT(ActionEvent event) {
+		voz.stop();
 		try {
 			arduino.killArduinoConnection();
+		} catch (ArduinoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mostrarPPTAux();
+    }
+	private void mostrarPPTAux() {
+		try {
+			FXMLLoader cargador = new FXMLLoader();
+			cargador.setLocation(Principal.class.getResource("/vistas/piedraPapelTijera.fxml"));
+			Parent raiz = (Parent) cargador.load();
+			ControlPPT control = cargador.getController();
+			Scene escenario = new Scene(raiz);
+			escenarioPrincipal.setScene(escenario);
+			control.setStage(escenarioPrincipal);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void mostrarInformacionAux() {
+		try {
+			FXMLLoader cargador = new FXMLLoader();
+			cargador.setLocation(Principal.class.getResource("/vistas/ayuda.fxml"));
+			Parent raiz = (Parent) cargador.load();
+			ControlAyuda control = cargador.getController();
+			Scene escenario = new Scene(raiz);
+			escenarioPrincipal.setScene(escenario);
+			control.setStage(escenarioPrincipal);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	@FXML
+	void mostrarInformacion(ActionEvent event) {
+		voz.stop();
+		try {
+			arduino.killArduinoConnection();
+		} catch (ArduinoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mostrarInformacionAux();
+	}
+	private void mostrarEsperarCartaAux() {
+		try {
 			FXMLLoader cargador = new FXMLLoader();
 			cargador.setLocation(Principal.class.getResource("/vistas/esperarCarta.fxml"));
 			Parent raiz = (Parent) cargador.load();
@@ -130,6 +196,12 @@ public class ControlVPrincipal {
 	@FXML
 	void mostrarEsperarCarta(ActionEvent event) {
 		voz.stop();
+		try {
+			arduino.killArduinoConnection();
+		} catch (ArduinoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		mostrarEsperarCartaAux();
 	}
 

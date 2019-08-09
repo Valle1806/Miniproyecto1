@@ -41,5 +41,6 @@
             <Image url="@../imagenes/Goranchancha.PNG" />
          </image>
       </ImageView>
+      <ImageView fx:id="gifAyuda" fitHeight="286.0" fitWidth="292.0" layoutX="400.0" layoutY="299.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </Pane>

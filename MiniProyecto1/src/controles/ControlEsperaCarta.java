@@ -55,7 +55,8 @@ public class ControlEsperaCarta {
 	private ImageView mensajeUbicaCarta;
 	@FXML
 	private Label nombreCarta;
-
+	@FXML
+	private ImageView gifAyuda;
 	@FXML
 	private ImageView imagenCarta;
 
@@ -71,9 +72,11 @@ public class ControlEsperaCarta {
 
 	public void initialize() {
 		video.setVisible(true);
-
+		File file = new File("src/imagenes/ayuda.gif");
+		Image image = new Image(file.toURI().toString());
+		gifAyuda.setImage(image);
 		voz.speak("Ubica la carta deseada sobre el sensor");
-
+ 
 		try {
 			arduino.arduinoRX(Parameters.COM_PORT, 9600, comListener);
 		} catch (ArduinoException e) {
@@ -88,7 +91,8 @@ public class ControlEsperaCarta {
 	void mostrarVideo(String nombre_video,int cartNumber) {
 		voz.stop();
 		reproducion_video = true;
-		final File f = new File("src/videos/" + nombre_video + ".mp4");
+		//final File f = new File("src/videos/" + nombre_video + ".mp4");
+		final File f = new File("src/videos/ayuda.mp4");
 		mediaPlayer = new MediaPlayer(new Media(f.toURI().toString()));
 		video.setMediaPlayer(mediaPlayer);
 		mediaPlayer.play();
@@ -102,8 +106,8 @@ public class ControlEsperaCarta {
 	}
 
 	private void putCart(String cartName) {
+		gifAyuda.setVisible(false);
 		File file = new File("src/imagenes/cartas/" + cartName + ".png");
-		System.out.println(file.toURI().toString());
 		Image image = new Image(file.toURI().toString());
 		imagenCarta.setImage(image);
 		imagenCarta.setVisible(true);
